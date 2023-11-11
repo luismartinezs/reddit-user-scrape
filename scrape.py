@@ -1,16 +1,16 @@
 import os
 import praw
 import json
+from dotenv import load_dotenv
 
-redditPassword = os.environ["REDDIT_PASSWORD"]
-
+load_dotenv()
 
 # Fill these in with your details
-client_id = os.environ["CLIENT_ID"]
-client_secret = os.environ["CLIENT_SECRET"]
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
 user_agent = 'script by /u/yourusername'
 username = 'saito200'
-password = redditPassword
+password = os.getenv("REDDIT_PASSWORD")
 
 # Authenticate to Reddit
 reddit = praw.Reddit(client_id=client_id,
@@ -44,7 +44,8 @@ def get_user_activity(reddit_user):
 my_activity = get_user_activity(reddit.redditor(username))
 
 # Write to a file
-with open('/mnt/data/my_reddit_activity.json', 'w') as f:
+filename = 'my_reddit_activity.json'
+with open(filename, 'w') as f:
     json.dump(my_activity, f, indent=4)
 
-print('All posts and comments have been saved to my_reddit_activity.json')
+print(f'All posts and comments have been saved to {filename}')
