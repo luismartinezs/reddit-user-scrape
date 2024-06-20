@@ -1,8 +1,9 @@
+import os
 import json
 from datetime import datetime
 
 # Load the data from the JSON file
-with open('my_reddit_activity.json', 'r') as f:
+with open(os.path.join('output', 'my_reddit_activity.json'), 'r') as f:
     data = json.load(f)
 
 # Extract posts and comments, convert timestamps, and combine them
@@ -17,8 +18,10 @@ activities = [
 # Sort by date
 activities.sort()
 
+filepath = os.path.join('output', 'combined_activities_by_date.txt')
+
 # Write the combined activities to a new file with dates
-with open('combined_activities_by_date.txt', 'w') as f:
+with open(filepath, 'w') as f:
     for date, text in activities:
         if text:
           f.write(f"{date.strftime('%Y-%m-%d')}\n{text}\n\n")

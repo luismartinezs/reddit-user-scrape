@@ -44,8 +44,8 @@ def get_user_activity(reddit_user):
 my_activity = get_user_activity(reddit.redditor(username))
 
 # Write to a file
-filename = 'my_reddit_activity.json'
-with open(filename, 'w') as f:
+fiilepath = os.path.join('output', 'my_reddit_activity.json')
+with open(fiilepath, 'w') as f:
     json.dump(my_activity, f, indent=4)
 
 print(f'All posts and comments have been saved to {filename}')
